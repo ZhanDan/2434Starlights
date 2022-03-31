@@ -24,8 +24,13 @@ public class VN_PlayerController : MonoBehaviour
     public GameObject interactObject;
     private VN_Interactable interactable;
 
+    [Header("Camera")]
+    public GameObject cameraObject;
+    private VN_CameraController camController;
+
     private void Start()
     {
+        camController = cameraObject.GetComponent<VN_CameraController>();
         //currentRoom = activeRoom ? activeRoom.GetComponent<VN_Room>() : new VN_Room();
     }
 
@@ -74,12 +79,16 @@ public class VN_PlayerController : MonoBehaviour
     {
         activeRoom = room.gameObject;
         currentRoom = activeRoom.GetComponent<VN_Room>();
+        camController.GetRoomDimension(activeRoom.transform.position);
+        camController.EditCameraProperties(currentRoom.cameraOffset, currentRoom.cameraSize);
+        camController.ChangeRoom(currentRoom.followCameraMode);
     }
 
     public void ExitRoom()
     {
         activeRoom = null;
         currentRoom = null;
+        camController.ChangeRoom(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

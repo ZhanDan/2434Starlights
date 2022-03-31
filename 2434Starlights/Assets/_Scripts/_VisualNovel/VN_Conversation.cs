@@ -28,7 +28,10 @@ public class VN_Conversation : VN_Interactable
                     Debug.Log("intawefawesgawsergawerg");
                     prevSpeaker.Speaker.SetActive(false);
                 }
-                dialogueThread[threadCounter].Speaker.SetActive(true);
+                if (dialogueThread[threadCounter].Speaker)
+                {
+                    dialogueThread[threadCounter].Speaker.SetActive(true);
+                }
                 dialogueText.text = dialogueThread[threadCounter].dialogue;
                 prevSpeaker = dialogueThread[threadCounter];
                 threadCounter += 1;

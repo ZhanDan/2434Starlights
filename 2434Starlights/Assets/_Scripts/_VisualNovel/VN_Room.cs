@@ -7,12 +7,15 @@ public class VN_Room : MonoBehaviour
 {
     public Vector2 defaultStartPos;//For when the player starts in this room
     public Boundary roomBoundary;//represents the player's moveable area
+    public bool followCameraMode = false;
+    public float cameraOffset = 0f;
+    public float cameraSize = 5f;
 
     private void Start()
     {
         BoxCollider2D roomCollider = gameObject.GetComponent<BoxCollider2D>();
-        roomBoundary.width = roomCollider.size.x;
-        roomBoundary.height = roomCollider.size.y;
+        roomBoundary.width = roomCollider.size.x * transform.localScale.x;
+        roomBoundary.height = roomCollider.size.y * transform.localScale.y;
     }
 
     private void OnDrawGizmosSelected()
